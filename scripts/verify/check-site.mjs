@@ -20,6 +20,7 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { SITE_URL as CANONICAL_SITE_URL } from "../lib/urls.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..");
@@ -67,6 +68,29 @@ const SITE_URL = (() => {
 
 const pages = walk(SITE);
 const problems = [];
+
+// course-site.yml and scripts/lib/urls.mjs each say where this site is published,
+// one for the theme and one for the scripts. They move together or the site
+// declares a canonical it is not served at, which is the kind of thing nobody
+// notices until a search engine does.
+if (SITE_URL !== `${CANONICAL_SITE_URL}/`) {
+  problems.push(
+    `course-site.yml site_url is ${SITE_URL || "missing"}, scripts/lib/urls.mjs SITE_URL is ${CANONICAL_SITE_URL}`
+  );
+}
+
+// The publish step force-pushes an orphan branch, so the CNAME file it writes is
+// the only thing that keeps the custom domain on the host. A cname that names
+// another host, or none, takes the course off its address at the next push.
+const publishedCname = (() => {
+  const match = fs.readFileSync(path.join(ROOT, ".github", "workflows", "pages.yml"), "utf8").match(/^\s*cname:\s*(\S+)/m);
+  return match ? match[1] : null;
+})();
+if (publishedCname !== new URL(CANONICAL_SITE_URL).host) {
+  problems.push(
+    `.github/workflows/pages.yml publishes cname ${publishedCname || "missing"}, scripts/lib/urls.mjs SITE_URL is ${CANONICAL_SITE_URL}`
+  );
+}
 let references = 0;
 let links_checked = 0;
 let cards = 0;
@@ -176,6 +200,24 @@ if (fs.existsSync(recordsDir) && SITE_URL) {
         }
       }
     }
+  }
+}
+
+// The statistics page is generated, like the badges, and is in the menu of every
+// language: a build that skipped it leaves a menu entry that answers 404.
+const labLocales = fs
+  .readdirSync(path.join(ROOT, "labs"), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && /^[a-z]{2}(-[A-Z]{2})?$/.test(entry.name))
+  .map((entry) => entry.name);
+for (const locale of labLocales) {
+  const page = path.join(locale === "en" ? "" : locale, "stats", "index.html");
+  if (!fs.existsSync(path.join(SITE, page))) {
+    problems.push(`/${page.replace(/\\/g, "/")} (the statistics page of ${locale} was not built)`);
+  }
+  // The Hall of Fame is generated the same way, but stays out of the menu
+  const hall = path.join(locale === "en" ? "" : locale, "hall-of-fame", "index.html");
+  if (!fs.existsSync(path.join(SITE, hall))) {
+    problems.push(`/${hall.replace(/\\/g, "/")} (the Hall of Fame page of ${locale} was not built)`);
   }
 }
 

@@ -159,7 +159,8 @@ function writeInDescription(file, text) {
   const eol = original.includes("\r\n") ? "\r\n" : "\n";
   const body = text.split("\n").join(eol);
   // Some commands type it: `public static description: string = \`...\``
-  const match = original.match(/public static description(?::\s*string)? = `([\s\S]*?)`;/);
+  // The template ends at the first backtick that is not escaped: descriptions often hold \`;
+  const match = original.match(/public static description(?::\s*string)? = `((?:\\[\s\S]|[^\\`])*)`;/);
   if (!match) {
     return null;
   }
@@ -267,7 +268,7 @@ const coursePage = [
   "",
   "### What you need",
   "",
-  "- A computer you are allowed to install software on. Not allowed to? The course also runs in [Agentforce Vibes](https://www.salesforce.com/agentforce/developers/vibe-coding/ide/), which is VS Code in a browser tab, and in [Cursor](https://cursor.com/).",
+  "- A computer you are allowed to install software on. Not allowed to? The course also runs in [Agentforce Vibes](https://www.salesforce.com/agentforce/developers/vibe-coding/ide/), which is VS Code in a browser tab, and in [Cursor](https://cursor.com/). Follow it in VS Code, Agentforce Vibes or Cursor, and keep the same one from start to finish.",
   "- A free [GitHub](https://github.com/) account.",
   "- One free [Salesforce Developer Edition org](https://developer.salesforce.com/signup) to start with, and one more at Level 3.",
   "- Nothing else: no paid service, no license, no credit card.",

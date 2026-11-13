@@ -4,12 +4,12 @@ description: "Formation Salesforce DevOps gratuite et pratique pour admins et d�
 id: l1-home
 level: 1
 lang: fr
-source_rev: "e7208fdb3ddb4226315f5595365f110c93c132af"
+source_rev: "e94688952cae1173b409f47f21ec77110153901f"
 ---
 
 # Niveau 1 - Contributeur Salesforce DevOps, les bases
 
-**Durée** : environ 2 h 15, en une fois ou en sept.
+**Durée** : environ 2 h, en une fois ou en sept.<!-- observed --> Observé sur les Labs 1.3 à 1.7 : médiane 1 h 27, 71 participants, le plus rapide 33 min.<!-- /observed -->
 
 **Prérequis** : aucun. C'est le premier niveau.
 
@@ -47,10 +47,10 @@ s'en charge.
 |-------------------------------------------------------------|--------------------------------------------------------------------|--------|
 | [1.1](1-1-install-vs-code-and-sfdx-hardis.md)               | Installer VS Code, Git et sfdx-hardis                              | 15 min |
 | [1.2](1-2-create-your-dev-hub-scratch-orgs-and-pipeline.md) | Créer votre Dev Hub, vos scratch orgs et votre pipeline CI/CD      | 30 min |
-| [1.3](1-3-start-a-user-story-on-a-git-branch.md)            | Démarrer une User Story sur sa propre branche Git                  | 10 min |
-| [1.4](1-4-build-a-custom-field-in-your-org.md)              | Construire un champ personnalisé dans votre org Salesforce         | 15 min |
-| [1.5](1-5-retrieve-commit-and-publish-your-changes.md)      | Récupérer, commiter et publier vos modifications Salesforce        | 20 min |
-| [1.6](1-6-pull-request-deployment-check-and-merge.md)       | Ouvrir une Pull Request, passer le contrôle de déploiement, merger | 20 min |
+| [1.3](1-3-start-a-user-story-on-a-git-branch.md)            | Démarrer une User Story sur sa propre branche Git                  | 5 min  |
+| [1.4](1-4-build-a-custom-field-in-your-org.md)              | Construire un champ personnalisé dans votre org Salesforce         | 10 min |
+| [1.5](1-5-retrieve-commit-and-publish-your-changes.md)      | Récupérer, commiter et publier vos modifications Salesforce        | 15 min |
+| [1.6](1-6-pull-request-deployment-check-and-merge.md)       | Ouvrir une Pull Request, passer le contrôle de déploiement, merger | 15 min |
 | [1.7](1-7-capstone-deliver-a-user-story-on-your-own.md)     | Épreuve finale : livrer une User Story tout seul                   | 25 min |
 
 ## Le menu Training
@@ -63,15 +63,15 @@ seul menu. Ouvrez la **Welcome page**, et sous **CUSTOM MENUS** cliquez sur la c
 
 Elles sont sept, et les labs les appellent par ces noms :
 
-| Commande                           | Ce qu'elle fait                                                                                       |
-|------------------------------------|-------------------------------------------------------------------------------------------------------|
-| **Set up my training environment** | Forke le repository, crée vos scratch orgs avec l'application, câble la pipeline                      |
-| **Where am I?**                    | Dit à quel niveau et à quel lab vous en êtes, et ce qu'il faut faire ensuite                          |
-| **Check my work**                  | Vérifie le lab que vous venez de terminer et affiche votre reçu                                       |
-| **Trigger my workflows**           | Démarre les contrôles de votre Pull Request quand Actions était coupé sur le fork                     |
-| **Claim my badge**                 | Contrôle le niveau entier, puis ouvre votre demande de badge déjà remplie                             |
-| **Update my course**               | Apporte les changements reçus par le cours depuis votre fork, par une Pull Request vers `integration` |
-| **Reset this level**               | Remet votre repository au début du Niveau 1                                                           |
+| Commande                           | Ce qu'elle fait                                                                                                                                          |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Set up my training environment** | Forke le repository, crée vos scratch orgs avec l'application, câble la pipeline                                                                         |
+| **Where am I?**                    | Dit à quel niveau et à quel lab vous en êtes, et ce qu'il faut faire ensuite                                                                             |
+| **Check my work**                  | Vérifie le lab que vous venez de terminer                                                                                                                |
+| **Trigger my workflows**           | Démarre les contrôles de votre Pull Request quand Actions était coupé sur le fork                                                                        |
+| **Claim my badge**                 | Contrôle le niveau entier, puis ouvre votre demande de badge déjà remplie                                                                                |
+| **Update my course**               | Apporte les changements reçus par le cours depuis votre fork, par une Pull Request vers `integration`                                                    |
+| **Reset this level**               | Recommence le Niveau 1 : `integration`, et si vous le voulez les branches des labs et les orgs ([Recommencer le cours](../help.md#recommencer-le-cours)) |
 
 Il y a un menu par niveau, et chacun ne contient que ce dont ce niveau a besoin : rien de ce que vous
 avez sous les yeux ne concerne un lab que vous n'avez pas encore atteint.
@@ -94,8 +94,10 @@ Là où une commande apparaît, c'est dans un bloc **Sous le capot**, qui expliq
 fait. Vous n'avez jamais à la retaper.
 
 **Vous pouvez toujours repartir de zéro.** Si un lab tourne mal, Welcome page >
-**Training: Level 1** > **Reset this level** remet votre repository au début du niveau. Un lab raté ne met
-pas fin à votre formation.
+**Training: Level 1** > **Reset this level** remet `integration` au début du niveau, et propose de
+nettoyer les branches de ses labs et de remettre vos orgs en place. Un lab raté ne met pas fin à
+votre formation : [Recommencer le cours](../help.md#recommencer-le-cours) dit ce que fait chaque
+réponse.
 
 ## Si vous êtes bloqué
 
